@@ -1,11 +1,15 @@
 import os
 
 import pygame
+from pygame.sprite import Sprite
 
-class Ship:
+
+class Ship(Sprite):
     """飞船类"""
-    def __init__(self,ai_game):
+
+    def __init__(self, ai_game):
         """初始化飞船"""
+        super().__init__()
         self.screen = ai_game.screen
         self.settings = ai_game.settings
         self.screen_rect = ai_game.screen.get_rect()
@@ -34,6 +38,7 @@ class Ship:
         if self.moving_left and self.rect.left > 0:
             self.x -= self.settings.ship_speed
         self.rect.x = self.x
+
     def blitme(self):
         """指定位置绘制飞船"""
         self.screen.blit(self.image, self.rect)
