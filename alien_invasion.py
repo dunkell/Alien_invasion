@@ -29,6 +29,31 @@ class AlienInvasion:
     def _create_fleet(self):
         """创建外星人群"""
         alien = Alien(self)
+
+        #  一行外星人个数
+        alien_width = alien.rect.width
+        alien_space_x = self.settings.screen_width - (2 * alien_width)
+
+        number_aliens_x = alien_space_x / (2 * alien_width)
+
+        # 多少行外星人
+        alien_height = alien.rect.height
+        alien_space_y = self.screen.get_height() - (3 * alien_height) - self.ship.rect.height
+
+        number_rows = int(alien_space_y / (2 * alien_height))
+
+        # 创建外星人群
+        for row_number in range(int(number_rows)):
+            for alien_number in range(int(number_aliens_x)):
+                self._creat_alien(alien_number,row_number)
+
+    def _creat_alien(self, alien_number,row_number):
+        """创建一个外星人并将其放在当前行"""
+        alien = Alien(self)
+        alien_width,alien_height = alien.rect.size
+        alien.x = alien_width + 2 * alien_width * alien_number
+        alien.rect.x = alien.x
+        alien.rect.y = alien.rect.height + 2 * alien.rect.height * row_number
         self.aliens.add(alien)
 
     def run_game(self):
