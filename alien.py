@@ -21,3 +21,16 @@ class Alien(Sprite):
 
         self.x = float(self.rect.x)
 
+        # 速度
+        self.speed = ai_game.settings.alien_speed
+
+    def check_edges(self):
+        screen_rect = self.screen.get_rect()
+        if self.rect.right >= screen_rect.right or self.rect.left <= 0:
+            return True
+
+    def update(self,alien_speed,fleet_direction):
+        """向右移动外星人"""
+        self.x += alien_speed * fleet_direction
+        self.rect.x = self.x
+
